@@ -9,7 +9,7 @@
               <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange"><span class="cart-checked-all">全选</span></el-checkbox>
             </el-col>
             <el-col :span="11">款式信息</el-col>
-            <el-col :span="9">文件</el-col>
+            <el-col :span="9">价格</el-col>
             <el-col :span="2">操作</el-col>
           </el-row>
         </div>
@@ -24,10 +24,10 @@
             <el-col :span="4" class="styleName">{{ item.styleName }}</el-col>
             <el-col :span="6" class="content" >
               <div class="tags">标签： {{ item.tags }}</div>
-              <div class="create-time">创建日期： {{ item.createTime }}</div>
+              <div class="create-time">创建日期： {{ item.createTime | dateFormat }}</div>
             </el-col>
             <el-col :span="9" style="padding: 0">
-              <span class="files">{{ item.file }}</span>
+              <span class="files">￥{{ item.price | priceToCurrency }}</span>
             </el-col>
             <el-col :span="2" style="padding: 0">
               <span class="delete" @click="deleteIt(item)">删除</span>
@@ -45,10 +45,10 @@
             <el-col :span="4" class="styleName">{{ item.styleName }}</el-col>
             <el-col :span="6" class="content">
               <div class="tags">标签： {{ item.tags }}</div>
-              <div class="create-time">创建日期： {{ item.createTime }}</div>
+              <div class="create-time">创建日期： {{ item.createTime | dateFormat}}</div>
             </el-col>
             <el-col :span="9" style="padding: 0">
-              <span class="files">{{ item.file }}</span>
+              <span class="files">￥{{ item.price | priceToCurrency }}</span>
             </el-col>
             <el-col :span="2" style="padding: 0">
               <span class="delete" @click="deleteIt(item)">删除</span>
@@ -62,11 +62,14 @@
         <el-col :span="2" class="selected-all-box">
           <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange"><span class="cart-checked-all">全选</span></el-checkbox>
         </el-col>
-        <el-col :span="18" class="delete-all">
+        <el-col :span="15" class="delete-all">
           <span class="delete" @click="deleteAll">删除</span>
         </el-col>
         <el-col :span="3" class="has-chose-box">
           <span class="has-chosed">已选择<span class="number">{{ selected_count }}</span>项</span>
+        </el-col>
+        <el-col :span="3" class="has-chose-box">
+          <span class="has-chosed">金额:<span class="number">￥{{ selected_amount | priceToCurrency }}</span></span>
         </el-col>
         <el-col :span="2" class="downloads">
           <div class="download-button" @click="downloadsIt">立即支付</div>
@@ -76,42 +79,18 @@
   </div>
 </template>
 <script>
+import { priceToCurrency } from '@/filter'
+import { getList } from '@/api/cart'
 export default {
+  filters: {
+    priceToCurrency
+  },
   data() {
     return {
       checkAll: false,
       isIndeterminate: false,
-      validList: [
-        {
-          id: 11,
-          selected: false,
-          image: 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-          styleName: '正加盟款式名称正加盟款式名称正加盟款式名称正加盟款式名称正加盟款式名称正加盟款式名称正加盟款式名称',
-          tags: ['2022', '春夏', 'l连衣裙'],
-          createTime: 178987543322,
-          file: ['CAD', '面辅料']
-        },
-        {
-          id: 12,
-          selected: false,
-          image: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-          styleName: 'shaya盟款式名称',
-          tags: ['2022', '春夏', 'l连衣裙', '2022', '春夏', 'l连衣裙', '2022', '春夏', 'l连衣裙', '2022', '春夏', 'l连衣裙', '2022', '春夏', 'l连衣裙'],
-          createTime: 178987543322,
-          file: ['CAD', '面辅料']
-        }
-      ],
-      invalidList: [
-        {
-          id: 21,
-          selected: false,
-          image: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-          styleName: '正加盟款式名称正加盟款式名称正加盟款式名称正加盟款式名称正加盟款式名称正加盟款式名称正加盟款式名称',
-          tags: ['2022', '春夏', 'l连衣裙', '2022', '春夏', 'l连衣裙', '2022', '春夏', 'l连衣裙', '2022', '春夏', 'l连衣裙', '2022', '春夏', 'l连衣裙'],
-          createTime: 178987543322,
-          file: ['CAD', '面辅料']
-        }
-      ],
+      validList: [],
+      invalidList: [],
       checkedCount: 0
     }
   },
@@ -125,9 +104,29 @@ export default {
         }
       }
       return total_count
+    },
+    selected_amount() {
+      var total_amount = 0
+      for (var i = 0; i < this.validList.length; i++) {
+        if (this.validList[i].selected) {
+          console.log(this.validList[i])
+          total_amount += this.validList[i].price
+        }
+      }
+      return total_amount
     }
   },
+  mounted() {
+    this.getList()
+  },
   methods: {
+    // 获取数据
+    getList() {
+      getList().then(res => {
+        this.validList = res.data.validList
+        this.invalidList = res.data.invalidList
+      })
+    },
     // 全选 反选
     handleCheckAllChange(val) {
       if (val) {

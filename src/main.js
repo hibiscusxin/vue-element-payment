@@ -33,6 +33,23 @@ Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
 
+import moment from 'moment'
+// 定义时间格式全局过滤器
+Vue.filter('dateFormat', function(dataStr) {
+  let format = ''
+  const pattern = 'YYYY/MM/DD'
+  const date = new Date()
+  if (!dataStr) {
+    return format
+  } else if (moment(date).format(pattern) === moment(dataStr).format(pattern)) { // 判断时间是否等于今天
+    const data = new Date(dataStr)
+    format = data.toLocaleTimeString()
+  } else {
+    format = moment(dataStr).format(pattern)
+  }
+  return format
+})
+
 Vue.config.productionTip = false
 
 new Vue({
