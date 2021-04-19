@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === 'production') {
 Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
-
+import '@/styles/iconfont/iconfont.css'
 import moment from 'moment'
 // 定义时间格式全局过滤器
 Vue.filter('dateFormat', function(dataStr) {

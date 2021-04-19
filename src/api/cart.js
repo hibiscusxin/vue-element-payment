@@ -7,3 +7,19 @@ export function getList(params) {
     params
   })
 }
+
+// 微信支付
+export function paymentWe() {
+  return request({
+    url: '/vue-admin-template/cart/paymentWe',
+    method: 'post'
+  })
+}
+
+// 支付宝支付
+export function paymentAli() {
+  return request({
+    url: '/vue-admin-template/cart/paymentAli',
+    method: 'post'
+  })
+}

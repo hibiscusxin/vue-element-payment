@@ -58,12 +58,20 @@ export const constantRoutes = [
     path: '/cart',
     component: Layout,
     redirect: '/cart',
-    children: [{
-      path: 'cart',
-      name: 'Cart',
-      component: () => import('@/views/cart/cart'),
-      meta: { title: 'Dashboard', icon: 'el-icon-s-goods' }
-    }]
+    children: [
+      {
+        path: 'cart',
+        name: 'Cart',
+        component: () => import('@/views/cart/cart'),
+        meta: { title: 'Dashboard', icon: 'el-icon-s-goods' }
+      },
+      {
+        path: 'order',
+        name: 'Order',
+        component: () => import('@/views/cart/order'),
+        hidden: true
+      }
+    ]
   },
 
   // 404 page must be placed at the end !!!

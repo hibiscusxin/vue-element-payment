@@ -72,7 +72,7 @@
           <span class="has-chosed">金额:<span class="number">￥{{ selected_amount | priceToCurrency }}</span></span>
         </el-col>
         <el-col :span="2" class="downloads">
-          <div class="download-button" @click="downloadsIt">立即支付</div>
+          <div class="download-button" @click="payItNow">立即支付</div>
         </el-col>
       </el-row>
     </div>
@@ -100,7 +100,7 @@ export default {
       var total_count = 0
       for (var i = 0; i < this.validList.length; i++) {
         if (this.validList[i].selected) {
-          total_count ++
+          total_count++
         }
       }
       return total_count
@@ -147,7 +147,7 @@ export default {
       let checkedCounts = 0
       for (var i = 0; i < this.validList.length; i++) {
         if (this.validList[i].selected) {
-          checkedCounts ++
+          checkedCounts++
         }
       }
       this.checkedCount = checkedCounts
@@ -162,9 +162,14 @@ export default {
     deleteAll() {
       console.log('duo个删除')
     },
-    // 下载
-    downloadsIt() {
+    // 立即支付
+    payItNow() {
       console.log('下载')
+      this.$router.push({
+        path: 'order',
+        name: 'Order',
+        query: { subtotal: this.selected_amount}
+      })
     }
   }
 }
