@@ -41,9 +41,13 @@
 <script>
 import { priceToCurrency } from '@/filter'
 import { paymentWe, paymentAli } from '@/api/cart'
+import { WeChartPay } from './components/WeChartPay'
 export default {
   filters: {
     priceToCurrency
+  },
+  components: {
+    WeChartPay
   },
   data() {
     return {
@@ -69,8 +73,8 @@ export default {
       if (this.paymentRequest.payType === '0') {
         paymentAli(this.paymentRequest).then((res) => {
           this.loading = false
-          const result = res.form
-          if (res.code === 10000) {
+          const result = res.data
+          if (res.code === 20000) {
             this.$message.success('支付宝支付')
             const payDiv = document.getElementById('payDiv')
             if (payDiv) {
@@ -87,8 +91,8 @@ export default {
         })
       } else if (this.paymentRequest.payType === '1') {
         paymentWe(this.paymentRequest).then((res) => {
-          if (res.code === 10000) {
-            this.wechartForm = res.form
+          if (res.code === 20000) {
+            this.wechartForm = res.data
             this.dialogWeChartVisible = true
           }
         }).catch((err) => {
