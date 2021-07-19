@@ -8,8 +8,8 @@
             <el-col :span="2">
               <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange"><span class="cart-checked-all">全选</span></el-checkbox>
             </el-col>
-            <el-col :span="11">款式信息</el-col>
-            <el-col :span="9">价格</el-col>
+            <el-col :span="11">商品信息</el-col>
+            <el-col :span="9">金额</el-col>
             <el-col :span="2">操作</el-col>
           </el-row>
         </div>
@@ -23,8 +23,8 @@
             </el-col>
             <el-col :span="4" class="styleName">{{ item.styleName }}</el-col>
             <el-col :span="6" class="content" >
-              <div class="tags">标签： {{ item.tags }}</div>
-              <div class="create-time">创建日期： {{ item.createTime | dateFormat }}</div>
+              <div class="tags">分类： {{ item.tags }}</div>
+              <div class="create-time">日期： {{ item.createTime | dateFormat }}</div>
             </el-col>
             <el-col :span="9" style="padding: 0">
               <span class="files">￥{{ item.price | priceToCurrency }}</span>
@@ -44,8 +44,8 @@
             </el-col>
             <el-col :span="4" class="styleName">{{ item.styleName }}</el-col>
             <el-col :span="6" class="content">
-              <div class="tags">标签： {{ item.tags }}</div>
-              <div class="create-time">创建日期： {{ item.createTime | dateFormat}}</div>
+              <div class="tags">分类： {{ item.tags }}</div>
+              <div class="create-time">日期： {{ item.createTime | dateFormat}}</div>
             </el-col>
             <el-col :span="9" style="padding: 0">
               <span class="files">￥{{ item.price | priceToCurrency }}</span>
@@ -66,13 +66,13 @@
           <span class="delete" @click="deleteAll">删除</span>
         </el-col>
         <el-col :span="3" class="has-chose-box">
-          <span class="has-chosed">已选择<span class="number">{{ selected_count }}</span>项</span>
+          <span class="has-chosed">已选择<span class="number">{{ selected_count }}</span>件</span>
         </el-col>
         <el-col :span="3" class="has-chose-box">
-          <span class="has-chosed">金额:<span class="number">￥{{ selected_amount | priceToCurrency }}</span></span>
+          <span class="has-chosed">合计:<span class="number">￥{{ selected_amount | priceToCurrency }}</span></span>
         </el-col>
         <el-col :span="2" class="downloads">
-          <div class="download-button" @click="payItNow">立即支付</div>
+          <div class="download-button" @click="payItNow">结算</div>
         </el-col>
       </el-row>
     </div>
