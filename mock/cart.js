@@ -4,19 +4,19 @@ const list = {
       id: 11,
       selected: false,
       image: 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-      styleName: '正加盟款式名称正加盟款式名称正加盟款式名称正加盟款式名称正加盟款式名称正加盟款式名称正加盟款式名称',
-      tags: ['2022', '春夏', 'l连衣裙'],
-      createTime: 178987543322,
-      price: 120
+      styleName: '我是名字名字名字名字啊',
+      tags: ['tags1', 'tags2', 'tags3'],
+      createTime: 15423343322,
+      price: 12
     },
     {
       id: 12,
       selected: false,
       image: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-      styleName: 'shaya盟款式名称',
-      tags: ['2022', '春夏', 'l连衣裙', '2022', '春夏', 'l连衣裙', '2022', '春夏', 'l连衣裙', '2022', '春夏', 'l连衣裙', '2022', '春夏', 'l连衣裙'],
-      createTime: 178987543322,
-      price: 130
+      styleName: '我是名字啊',
+      tags: ['tags1', 'tags2', 'tags3', 'tags11', 'tags12', 'tags13', 'tags21', 'tags22', 'tags23', 'tags31', 'tags32', 'tags33', 'tags41', 'tags42', 'tags43'],
+      createTime: 15423343322,
+      price: 13
     }
   ],
   invalidList: [
@@ -24,10 +24,10 @@ const list = {
       id: 21,
       selected: false,
       image: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-      styleName: '正加盟款式名称正加盟款式名称正加盟款式名称正加盟款式名称正加盟款式名称正加盟款式名称正加盟款式名称',
-      tags: ['2022', '春夏', 'l连衣裙', '2022', '春夏', 'l连衣裙', '2022', '春夏', 'l连衣裙', '2022', '春夏', 'l连衣裙', '2022', '春夏', 'l连衣裙'],
-      createTime: 178987543322,
-      price: 110
+      styleName: '我是名字名字名字名字啊我是名字名字名字名字啊我是名字名字名字名字啊我是名字名字名字名字啊我是名字名字名字名字啊',
+      tags: ['tags1', 'tags2', 'tags3', 'tags11', 'tags12', 'tags13', 'tags21', 'tags22', 'tags23'],
+      createTime: 15423343322,
+      price: 11
     }
   ]
 }
